@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Release Readiness Agent</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Watermark -->
+    <div class="watermark">@GK</div>
+    
+    <!-- Navigation Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img id="company-logo" src="assets/logo-placeholder.png" alt="Company Logo" class="logo">
+                <span id="company-name" class="company-name">Pharmaceutical Company</span>
+            </div>
+            <nav class="nav-menu">
+                <button id="theme-toggle" class="theme-btn" title="Toggle Dark Mode">🌙</button>
+                <button id="settings-btn" class="nav-btn" style="display:none;">⚙️ Settings</button>
+                <button id="logout-btn" class="nav-btn" style="display:none;">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="auth-container">
+                <h1>Batch Release Readiness Agent</h1>
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div class="auth-links">
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                        <a href="#" id="signup-link">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Registration Screen -->
+        <div id="register-screen" class="screen">
+            <div class="auth-container">
+                <h1>Create Account</h1>
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="auth-links">
+                        <a href="#" id="login-link">Already have an account? Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Password Reset Screen -->
+        <div id="reset-password-screen" class="screen">
+            <div class="auth-container">
+                <h1>Reset Password</h1>
+                <form id="reset-password-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="reset-email">Email Address</label>
+                        <input type="email" id="reset-email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                    <div class="auth-links">
+                        <a href="#" id="back-to-login">Back to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Force Password Change Screen -->
+        <div id="change-password-screen" class="screen">
+            <div class="auth-container">
+                <h1>Change Default Password</h1>
+                <p class="warning">For security reasons, please change your default password.</p>
+                <form id="change-password-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-new-password">Confirm New Password</label>
+                        <input type="password" id="confirm-new-password" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard-screen" class="screen">
+            <div class="dashboard-container">
+                <h1>Batch Release Dashboard</h1>
+                
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Pending Batches</h3>
+                        <span id="pending-batches">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Approved Batches</h3>
+                        <span id="approved-batches">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Rejected Batches</h3>
+                        <span id="rejected-batches">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Compliance Score</h3>
+                        <span id="compliance-score">95%</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="new-batch-btn" class="btn btn-primary">Create New Batch</button>
+                    <button id="view-batches-btn" class="btn btn-secondary">View All Batches</button>
+                    <button id="user-management-btn" class="btn btn-secondary admin-only" style="display:none;">User Management</button>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div id="activity-list" class="activity-list">
+                        <!-- Activity items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Creation Screen -->
+        <div id="batch-creation-screen" class="screen">
+            <div class="batch-container">
+                <h1>Create New Batch Release</h1>
+                
+                <form id="batch-form" class="batch-form">
+                    <!-- Batch Information -->
+                    <div class="form-section">
+                        <h2>Batch Information</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="batch-number">Batch Number</label>
+                                <input type="text" id="batch-number" name="batchNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-name">Product Name</label>
+                                <input type="text" id="product-name" name="productName" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="batch-size">Batch Size</label>
+                                <input type="text" id="batch-size" name="batchSize" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="manufacturing-date">Manufacturing Date</label>
+                                <input type="date" id="manufacturing-date" name="manufacturingDate" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Document Upload Section -->
+                    <div class="form-section">
+                        <h2>Document Upload</h2>
+                        <div id="document-upload-grid" class="document-grid">
+                            <!-- Document upload cards will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- BMR Integration -->
+                    <div class="form-section">
+                        <h2>Batch Manufacturing Record (BMR)</h2>
+                        <div id="bmr-integration">
+                            <button type="button" id="load-bmr-template" class="btn btn-secondary">Load BMR Template</button>
+                            <div id="bmr-content" style="display:none;">
+                                <!-- BMR template will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compliance Analysis -->
+                    <div class="form-section">
+                        <h2>Compliance Analysis</h2>
+                        <div id="compliance-results" class="compliance-panel">
+                            <p>Upload documents to see compliance analysis</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" id="save-draft-btn" class="btn btn-secondary">Save Draft</button>
+                        <button type="submit" class="btn btn-primary">Submit for Review</button>
+                        <button type="button" id="cancel-batch-btn" class="btn btn-danger">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Batch List Screen -->
+        <div id="batch-list-screen" class="screen">
+            <div class="batch-list-container">
+                <h1>Batch Management</h1>
+                
+                <!-- Filters -->
+                <div class="filters">
+                    <select id="status-filter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="draft">Draft</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <input type="text" id="search-batches" placeholder="Search batches..." class="search-input">
+                </div>
+
+                <!-- Batch Table -->
+                <div class="table-container">
+                    <table id="batch-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Batch Number</th>
+                                <th>Product Name</th>
+                                <th>Status</th>
+                                <th>Created Date</th>
+                                <th>Created By</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="batch-table-body">
+                            <!-- Batch rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Screen -->
+        <div id="user-management-screen" class="screen">
+            <div class="user-management-container">
+                <h1>User Management</h1>
+                
+                <div class="user-actions">
+                    <button id="add-user-btn" class="btn btn-primary">Add New User</button>
+                </div>
+
+                <!-- User Table -->
+                <div class="table-container">
+                    <table id="user-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            <!-- User rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings-screen" class="screen">
+            <div class="settings-container">
+                <h1>Settings</h1>
+                
+                <div class="settings-grid">
+                    <!-- Company Settings -->
+                    <div class="settings-card">
+                        <h2>Company Settings</h2>
+                        <form id="company-settings-form">
+                            <div class="form-group">
+                                <label for="company-name-setting">Company Name</label>
+                                <input type="text" id="company-name-setting" name="companyName">
+                            </div>
+                            <div class="form-group">
+                                <label for="company-logo-upload">Company Logo</label>
+                                <input type="file" id="company-logo-upload" accept="image/*">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Company Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- System Settings -->
+                    <div class="settings-card">
+                        <h2>System Settings</h2>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="email-notifications"> Enable Email Notifications
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="audit-logging"> Enable Audit Logging
+                            </label>
+                        </div>
+                        <button id="save-system-settings" class="btn btn-primary">Save System Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-container">
+        <!-- Modals will be populated here -->
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container">
+        <!-- Toast notifications will be populated here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bmr.js"></script>
+    <script src="js/compliance.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
